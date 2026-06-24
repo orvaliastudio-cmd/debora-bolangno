@@ -282,46 +282,106 @@ const Hero = () => {
             Mentoria em carreira e liderança para profissionais que desejam ampliar seu impacto, fortalecer seu posicionamento e crescer com intenção.
           </motion.p>
 
-          {/* Destaque Turma Aberta Liderança Atualizada */}
+          {/* Destaque Turma Aberta Liderança Atualizada e Marca Intencional */}
           <motion.div 
             variants={item} 
-            className="mb-8 p-6 bg-[#FAF6F0] border border-verde/15 border-l-4 border-l-verde rounded-r-[24px] shadow-lg shadow-verde/5 text-left max-w-[540px] mx-auto md:mx-0 flex flex-col order-4"
+            className="mt-4 md:mt-6 mb-8 p-6 md:p-8 bg-[#FAF6F0] border border-verde/15 rounded-[32px] shadow-xl shadow-verde/5 text-left max-w-[540px] mx-auto md:mx-0 flex flex-col order-4"
           >
-            <div className="flex flex-wrap items-center gap-2.5 mb-3.5">
-              <span className="bg-verde text-creme text-[9px] uppercase tracking-[0.2em] font-bold px-2.5 py-1 rounded-md">
-                TURMA ABERTA
+            <div className="flex flex-wrap items-center gap-2.5 mb-4">
+              <span className="bg-verde text-creme text-[9px] uppercase tracking-[0.2em] font-black px-2.5 py-1 rounded-md">
+                TURMAS ABERTAS
               </span>
-              <span className="text-[10px] uppercase tracking-[0.12em] text-verde-med font-bold flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-dourado animate-pulse"></span> AGOSTO 2026
+              <span className="text-[10px] uppercase tracking-[0.12em] text-verde-med font-extrabold flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-dourado animate-pulse"></span> AGOSTO E SETEMBRO 2026
               </span>
             </div>
-            <h3 className="font-serif text-xl font-bold text-ink mb-1.5">Liderança Atualizada</h3>
-            <div className="text-[13px] text-ink/75 leading-relaxed space-y-2">
-              <p className="font-medium flex items-center gap-2">
-                <Calendar size={14} className="text-verde-med shrink-0" />
-                <span>Encontros: 03, 10, 17 e 24/08</span>
-              </p>
-              <p className="text-ink/60 flex items-center gap-2">
-                <Clock size={14} className="text-verde-med/70 shrink-0" />
-                <span>Segundas-feiras, das 20h às 21h30</span>
-              </p>
+            
+            <h3 className="font-serif text-xl md:text-2xl font-black text-ink mb-1 leading-tight">Escolha a turma ideal para o seu momento</h3>
+            <p className="text-xs md:text-[13px] text-ink/65 mb-6 leading-relaxed">
+              Dois programas ao vivo, com propostas diferentes e vagas abertas agora.
+            </p>
+            
+            <div className="space-y-4">
+              {/* Programa 1: Liderança Atualizada */}
+              <div className="bg-white border border-verde/10 rounded-2xl p-4 md:p-5 hover:border-verde/20 hover:shadow-md transition-all duration-300 flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center justify-between gap-2 mb-2">
+                    <h4 className="font-serif text-[15px] md:text-base font-extrabold text-verde">Liderança Atualizada</h4>
+                    <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[9px] font-black tracking-wider bg-verde/5 text-verde-med uppercase shrink-0">
+                      Turma semanal
+                    </span>
+                  </div>
+                  
+                  <p className="text-ink/80 text-[12px] leading-relaxed mb-3.5">
+                    Para líderes que querem se comunicar melhor, decidir com clareza e conduzir seus times com mais segurança.
+                  </p>
+
+                  <div className="space-y-1.5 text-[11px] md:text-xs mb-4">
+                    <div className="flex items-center gap-2 text-ink font-semibold">
+                      <Calendar size={13} className="text-dourado shrink-0" />
+                      <span>03, 10, 17 e 24/08</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-ink/75">
+                      <Clock size={13} className="text-verde-med/70 shrink-0" />
+                      <span>Segundas-feiras · 20h às 21h30</span>
+                    </div>
+                  </div>
+                </div>
+
+                <a 
+                  href="lideranca-atualizada.html" 
+                  className="inline-flex items-center gap-1.5 text-[10px] md:text-[11px] font-black text-verde hover:text-dourado uppercase tracking-widest transition-all duration-300 self-start group/link border-b border-verde/20 hover:border-dourado pb-0.5"
+                >
+                  <span>Garantir minha vaga</span>
+                  <ArrowRight size={13} className="transition-transform duration-300 group-hover/link:translate-x-1 text-verde group-hover/link:text-dourado" />
+                </a>
+              </div>
+
+              {/* Programa 2: Marca Intencional */}
+              <div className="bg-white border border-verde/10 rounded-2xl p-4 md:p-5 hover:border-verde/20 hover:shadow-md transition-all duration-300 flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center justify-between gap-2 mb-2">
+                    <h4 className="font-serif text-[15px] md:text-base font-extrabold text-verde">Marca Intencional</h4>
+                    <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[9px] font-black tracking-wider bg-dourado/10 text-[#8c744c] uppercase shrink-0">
+                      Turma quinzenal
+                    </span>
+                  </div>
+                  
+                  <p className="text-ink/80 text-[12px] leading-relaxed mb-3.5">
+                    Para profissionais que querem fortalecer posicionamento, narrativa e presença.
+                  </p>
+
+                  <div className="space-y-1.5 text-[11px] md:text-xs mb-4">
+                    <div className="flex items-center gap-2 text-ink font-semibold">
+                      <Calendar size={13} className="text-dourado shrink-0" />
+                      <span>12 e 26/08 · 09 e 23/09</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-ink/75">
+                      <Clock size={13} className="text-verde-med/70 shrink-0" />
+                      <span>Quartas-feiras · 20h às 21h30</span>
+                    </div>
+                  </div>
+                </div>
+
+                <a 
+                  href="marca-intencional.html" 
+                  className="inline-flex items-center gap-1.5 text-[10px] md:text-[11px] font-black text-verde hover:text-dourado uppercase tracking-widest transition-all duration-300 self-start group/link border-b border-verde/20 hover:border-dourado pb-0.5"
+                >
+                  <span>Garantir minha vaga</span>
+                  <ArrowRight size={13} className="transition-transform duration-300 group-hover/link:translate-x-1 text-verde group-hover/link:text-dourado" />
+                </a>
+              </div>
             </div>
           </motion.div>
           
           {/* CTAs da Hero (Principal & Secundário) */}
           <motion.div variants={item} className="order-5 mb-6 md:mb-8 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
             <a 
-              href="lideranca-atualizada.html" 
-              className="inline-flex items-center justify-center gap-4 bg-verde text-white px-8 md:px-10 py-4 rounded-full text-[11px] md:text-[12px] uppercase tracking-[0.25em] font-bold transition-all hover:bg-[#112e28] hover:-translate-y-px shadow-xl shadow-verde/20 group w-full sm:w-auto"
-            >
-              Garantir minha vaga
-              <ArrowRight size={20} className="transition-transform group-hover:translate-x-1" />
-            </a>
-            <a 
               href="#programas" 
-              className="inline-flex items-center justify-center gap-4 bg-transparent text-ink px-10 md:px-12 py-4 rounded-full text-[11px] md:text-[12px] uppercase tracking-[0.25em] font-bold border-2 border-ink/10 transition-all duration-300 hover:bg-[#FAF6F0] hover:border-verde hover:text-verde hover:-translate-y-px hover:shadow-md w-full sm:w-auto"
+              className="inline-flex items-center justify-center gap-4 bg-verde text-white px-8 md:px-10 py-4 rounded-full text-[11px] md:text-[12px] uppercase tracking-[0.25em] font-bold transition-all hover:bg-[#112e28] hover:-translate-y-px shadow-xl shadow-verde/20 group w-full sm:w-auto animate-pulse-subtle"
             >
-              Ver programas
+              Ver turmas abertas
+              <ArrowRight size={20} className="transition-transform group-hover:translate-x-1" />
             </a>
           </motion.div>
 
@@ -1150,6 +1210,40 @@ const Quiz = () => {
 const ProgramsGrid = () => {
   const cards = [
     {
+      title: "Liderança Atualizada",
+      subtitle: "MENTORIA EM GRUPO",
+      desc: "Saia do operacional e torne-se o gestor que inspira, delega com segurança e constrói times de alta performance.",
+      features: ["Aulas em grupo", "Ferramentas gerenciais", "Próxima turma em agosto"],
+      icon: <Users size={24} />,
+      link: "lideranca-atualizada.html",
+      whatsapp: "Olá, Débora! Tenho interesse em garantir minha vaga na turma de agosto do programa Liderança Atualizada.",
+      ctaPageLabel: "Garantir minha vaga",
+      isDestaque: true,
+      selo: "TURMA ABERTA",
+      encontros: {
+        title: "ENCONTROS ONLINE AO VIVO",
+        datas: "03, 10, 17 e 24/08",
+        horario: "Segundas-feiras, das 20h às 21h30"
+      }
+    },
+    {
+      title: "Marca Intencional",
+      subtitle: "POSICIONAMENTO",
+      desc: "Fortaleça sua presença, comunique seu valor com clareza e construa um posicionamento profissional mais estratégico.",
+      features: ["Clareza de posicionamento", "Narrativa profissional", "Comunicação de valor"],
+      icon: <Award size={24} />,
+      link: "marca-intencional.html",
+      whatsapp: "Olá, Débora! Tenho interesse em garantir minha vaga na turma de Marca Intencional.",
+      ctaPageLabel: "Garantir minha vaga",
+      isDestaque: true,
+      selo: "TURMA ABERTA",
+      encontros: {
+        title: "ENCONTROS ONLINE AO VIVO",
+        datas: "12 e 26/08, 09 e 23/09",
+        horario: "Quartas-feiras, das 20h às 21h30"
+      }
+    },
+    {
       title: "Mentoria Individual",
       subtitle: "GESTÃO DE CARREIRA",
       desc: "Processo personalizado de 8 sessões para quem busca clareza, segurança na tomada de decisão e avanço na velocidade que merece.",
@@ -1159,29 +1253,6 @@ const ProgramsGrid = () => {
       whatsapp: "Olá, gostaria de saber mais sobre a mentoria individual.",
       ctaPageLabel: "Conhecer programa",
       isDestaque: false
-    },
-    {
-      title: "Marca Intencional",
-      subtitle: "POSICIONAMENTO",
-      desc: "Domine sua narrativa e construa autoridade inquestionável para ser a primeira opção nos grandes projetos do mercado.",
-      features: ["Estratégia de LinkedIn", "Netweaving de Valor", "Personal Branding"],
-      icon: <Award size={24} />,
-      link: "marca-intencional.html",
-      whatsapp: "Olá, gostaria de saber mais sobre o programa Marca Intencional.",
-      ctaPageLabel: "Conhecer programa",
-      isDestaque: false
-    },
-    {
-      title: "Liderança Atualizada",
-      subtitle: "MENTORIA EM GRUPO",
-      desc: "Saia do operacional e torne-se o gestor que inspira, delega com segurança e constrói times de alta performance.",
-      features: ["Aulas em grupo", "Ferramentas gerenciais", "Próxima turma em agosto"],
-      icon: <Users size={24} />,
-      link: "lideranca-atualizada.html",
-      whatsapp: "Olá, gostaria de garantir minha vaga na turma de agosto da mentoria em grupo Liderança Atualizada.",
-      ctaPageLabel: "Garantir minha vaga",
-      isDestaque: true,
-      selo: "TURMA ABERTA EM AGOSTO"
     },
     {
       title: "Comunidade Sequoia",
@@ -1240,8 +1311,8 @@ const ProgramsGrid = () => {
               transition={{ delay: i * 0.1, duration: 0.8 }}
               className={`p-8 md:p-10 rounded-[32px] md:rounded-[40px] flex flex-col transition-all group relative overflow-hidden ${
                 card.isDestaque 
-                  ? "bg-[#FAF6F0] border-2 border-verde shadow-[0_20px_45px_rgba(26,58,46,0.08)] order-first lg:order-none z-10" 
-                  : "bg-white border border-ink/15 shadow-[0_10px_30px_rgba(0,0,0,0.02)] hover:border-verde/30 hover:shadow-[0_30px_60px_rgba(26,58,46,0.06)] order-none"
+                  ? "bg-[#FAF6F0] border-2 border-verde shadow-[0_20px_45px_rgba(26,58,46,0.08)] z-10" 
+                  : "bg-white border border-ink/15 shadow-[0_10px_30px_rgba(0,0,0,0.02)] hover:border-verde/30 hover:shadow-[0_30px_60px_rgba(26,58,46,0.06)]"
               }`}
             >
               <div className="flex justify-between items-start mb-6 w-full gap-4">
@@ -1258,16 +1329,16 @@ const ProgramsGrid = () => {
               <p className="text-[10px] uppercase tracking-[0.2em] text-ink/50 font-black mb-3">{card.subtitle}</p>
               <h3 className="font-serif text-[28px] font-bold text-ink leading-tight mb-4">{card.title}</h3>
               
-              {card.isDestaque && (
+              {card.encontros && (
                 <div className="mb-5 p-4 bg-verde/5 border border-verde/10 rounded-2xl text-xs flex flex-col gap-1.5 text-verde">
-                  <span className="uppercase text-[9px] font-black tracking-widest text-verde-med/75">ENCONTROS ONLINE AO VIVO</span>
+                  <span className="uppercase text-[9px] font-black tracking-widest text-verde-med/75">{card.encontros.title}</span>
                   <div className="flex items-center gap-2 font-bold text-ink">
                     <Calendar size={14} className="shrink-0 text-verde-med" />
-                    <span>03, 10, 17 e 24/08</span>
+                    <span>{card.encontros.datas}</span>
                   </div>
                   <div className="flex items-center gap-2 text-ink/75">
                     <Clock size={14} className="shrink-0 text-verde-med/70" />
-                    <span>Segundas-feiras, das 20h às 21h30</span>
+                    <span>{card.encontros.horario}</span>
                   </div>
                 </div>
               )}
