@@ -23,15 +23,19 @@
     <script>
       (function() {
         try {
-          var descriptor = Object.getOwnPropertyDescriptor(window, 'fetch');
-          if (descriptor && !descriptor.writable && !descriptor.set && descriptor.configurable) {
-            var _fetch = window.fetch;
-            Object.defineProperty(window, 'fetch', {
-              configurable: true,
-              enumerable: true,
-              get: function() { return _fetch; },
-              set: function(v) { _fetch = v; }
-            });
+          var descriptor = Object.getOwnPropertyDescriptor(window, 'fetch') || 
+                           Object.getOwnPropertyDescriptor(Window.prototype, 'fetch');
+          if (descriptor) {
+            var isReadOnly = !descriptor.writable || (descriptor.get && !descriptor.set);
+            if (isReadOnly && descriptor.configurable !== false) {
+              var _fetch = window.fetch;
+              Object.defineProperty(window, 'fetch', {
+                configurable: true,
+                enumerable: true,
+                get: function() { return _fetch; },
+                set: function(v) { _fetch = v; }
+              });
+            }
           }
         } catch (e) {
           console.error('Error fixing fetch descriptor:', e);
