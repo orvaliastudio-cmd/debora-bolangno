@@ -780,6 +780,7 @@ const Quiz = () => {
   const [nome, setNome] = useState("");
   const [wa, setWa] = useState("");
   const [showResult, setShowResult] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   const WA_NUMBER = "5511940803333";
 
@@ -868,8 +869,25 @@ const Quiz = () => {
     return Object.entries(counts).sort((a, b) => b[1] - a[1])[0][0] as keyof typeof results;
   };
 
-  const handleNext = () => step < steps.length ? setStep(step + 1) : setStep(6);
-  const handleBack = () => setStep(step - 1);
+  const selectOption = (val: string) => {
+    if (isTransitioning) return;
+    setIsTransitioning(true);
+    setAnswers(prev => ({ ...prev, [step]: val }));
+    
+    setTimeout(() => {
+      if (step < steps.length) {
+        setStep(step + 1);
+      } else {
+        setStep(6);
+      }
+      setIsTransitioning(false);
+    }, 350);
+  };
+
+  const handleBack = () => {
+    if (isTransitioning) return;
+    setStep(step - 1);
+  };
 
   const resultType = calcResult();
   const r = results[resultType];
@@ -883,62 +901,246 @@ const Quiz = () => {
 
   return (
     <section id="quiz" className="bg-brand-950 py-24 px-8 relative overflow-hidden">
-      <div className="max-w-3xl mx-auto relative z-10">
-        {!showResult ? (
-          <>
-            <div className="text-center mb-16">
-              <span className="text-[10px] uppercase tracking-[0.3em] font-bold text-highlight block mb-5">Diagnóstico Gratuito</span>
-              <h2 className="font-serif text-[clamp(28px,4vw,44px)] font-black text-creme leading-tight mb-4">Descubra qual é o seu<br /><span className="italic text-highlight">próximo movimento</span></h2>
-              <p className="text-creme/40 text-sm">Responda 5 perguntas rápidas e receba seu resultado personalizado.</p>
-            </div>
+      {/* Ambient decorative elements */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-highlight/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-verde-claro/5 rounded-full blur-[120px] pointer-events-none" />
 
-            {step <= steps.length ? (
-              <motion.div key={step} initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="space-y-8">
-                <div className="flex gap-2 mb-8">
-                  {[1, 2, 3, 4, 5].map(i => (
-                    <div key={i} className={`h-1 flex-1 rounded-full bg-creme transition-colors ${i <= step ? "opacity-100" : "opacity-10"}`} />
-                  ))}
-                </div>
-                <h3 className="font-serif text-2xl font-bold text-creme leading-tight mb-8">{steps[step-1].q}</h3>
-                <div className="grid grid-cols-1 gap-3">
-                  {steps[step-1].options.map((opt, i) => (
-                    <button
-                      key={i}
-                      onClick={() => { setAnswers({ ...answers, [step]: opt.v }); handleNext(); }}
-                      className={`flex items-center gap-5 p-5 border rounded-xl text-left transition-all ${answers[step] === opt.v ? "bg-highlight/20 border-highlight text-creme" : "bg-white/5 border-white/10 text-creme/60 hover:border-highlight/50 hover:bg-white/10"}`}
+      <div className="max-w-3xl mx-auto relative z-10">
+        <div className="text-center mb-12">
+          <span className="text-[10px] uppercase tracking-[0.3em] font-bold text-highlight block mb-5">Diagnóstico Gratuito</span>
+          <h2 className="font-serif text-[clamp(28px,4vw,44px)] font-black text-creme leading-tight mb-4">Descubra qual é o seu<br /><span className="italic text-highlight">próximo movimento</span></h2>
+          <p className="text-creme/40 text-sm">Responda 5 perguntas rápidas e receba seu resultado personalizado.</p>
+        </div>
+
+        {/* Dynamic, continuous, premium progress bar */}
+        {!showResult && (
+          <div className="mb-12 bg-white/5 border border-white/5 p-6 rounded-2xl">
+            <div className="flex justify-between items-center mb-3">
+              <span className="text-xs font-medium tracking-wider text-creme/50 uppercase">
+                {step <= steps.length ? `Questão ${step} de ${steps.length}` : "Diagnóstico Concluído"}
+              </span>
+              <div className="text-xs font-mono font-bold text-highlight flex items-center gap-1.5 bg-highlight/10 px-2.5 py-1 rounded-full border border-highlight/20">
+                <span>Progresso:</span>
+                <motion.span 
+                  key={`percent-${step}`}
+                  initial={{ opacity: 0, y: -4 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="inline-block min-w-[28px] text-right"
+                >
+                  {Math.round(((step <= steps.length ? step : steps.length) / steps.length) * 100)}%
+                </motion.span>
+              </div>
+            </div>
+            
+            {/* Elegant Outer Track */}
+            <div className="h-2 w-full bg-white/5 rounded-full overflow-hidden relative">
+              {/* Dynamic Animated Fill */}
+              <motion.div 
+                className="h-full bg-gradient-to-r from-highlight to-verde-claro rounded-full"
+                initial={{ width: "0%" }}
+                animate={{ width: `${((step <= steps.length ? step : steps.length) / steps.length) * 100}%` }}
+                transition={{ type: "spring", stiffness: 80, damping: 18 }}
+              />
+              
+              {/* Floating micro-step indicator circles */}
+              <div className="absolute inset-0 flex justify-between px-1 pointer-events-none items-center">
+                {[1, 2, 3, 4, 5].map((i) => (
+                  <div 
+                    key={i} 
+                    className={`w-1.5 h-1.5 rounded-full transition-all duration-500 ${
+                      i < step 
+                        ? "bg-creme scale-100" 
+                        : i === step 
+                          ? "bg-highlight scale-150 ring-4 ring-highlight/30" 
+                          : "bg-creme/25"
+                    }`}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        <div className="relative">
+          <AnimatePresence mode="wait">
+            {!showResult ? (
+              step <= steps.length ? (
+                <motion.div
+                  key={`step-${step}`}
+                  initial={{ opacity: 0, x: 25, filter: "blur(4px)" }}
+                  animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+                  exit={{ opacity: 0, x: -25, filter: "blur(4px)" }}
+                  transition={{ duration: 0.35, ease: [0.25, 1, 0.5, 1] }}
+                  className="space-y-8 w-full"
+                >
+                  <h3 className="font-serif text-2xl md:text-3xl font-bold text-creme leading-tight mb-8">
+                    {steps[step-1].q}
+                  </h3>
+                  
+                  <div className="grid grid-cols-1 gap-4">
+                    {steps[step-1].options.map((opt, i) => {
+                      const isSelected = answers[step] === opt.v;
+                      return (
+                        <motion.button
+                          key={i}
+                          onClick={() => selectOption(opt.v)}
+                          disabled={isTransitioning}
+                          whileHover={{ scale: isTransitioning ? 1 : 1.01, x: isTransitioning ? 0 : 4 }}
+                          whileTap={{ scale: isTransitioning ? 1 : 0.99 }}
+                          className={`flex items-center gap-5 p-5 border rounded-2xl text-left transition-all relative overflow-hidden ${
+                            isSelected 
+                              ? "bg-highlight/15 border-highlight text-creme shadow-[0_0_20px_rgba(9,119,139,0.15)]" 
+                              : "bg-white/5 border-white/10 text-creme/70 hover:border-highlight/50 hover:bg-white/10 hover:text-creme"
+                          }`}
+                        >
+                          {/* Left indicator bubble */}
+                          <div className={`w-9 h-9 rounded-full border flex items-center justify-center text-[12px] font-bold transition-all shrink-0 ${
+                            isSelected 
+                              ? "bg-highlight border-highlight text-white" 
+                              : "border-white/20 bg-white/5 text-creme/60"
+                          }`}>
+                            <AnimatePresence mode="wait">
+                              {isSelected ? (
+                                <motion.span
+                                  key="check"
+                                  initial={{ scale: 0, rotate: -45 }}
+                                  animate={{ scale: 1, rotate: 0 }}
+                                  exit={{ scale: 0 }}
+                                  className="flex items-center justify-center"
+                                >
+                                  <Check size={16} strokeWidth={3} />
+                                </motion.span>
+                              ) : (
+                                <span key="letter">{opt.l}</span>
+                              )}
+                            </AnimatePresence>
+                          </div>
+                          
+                          <span className="text-[15px] md:text-[16px] leading-snug font-medium">{opt.t}</span>
+                          
+                          {/* Selected background glow/accent */}
+                          {isSelected && (
+                            <motion.div 
+                              layoutId="active-bg-glow"
+                              className="absolute inset-0 bg-highlight/5 pointer-events-none"
+                              initial={false}
+                              transition={{ type: "spring", stiffness: 100, damping: 15 }}
+                            />
+                          )}
+                        </motion.button>
+                      );
+                    })}
+                  </div>
+                  
+                  {step > 1 && (
+                    <motion.button 
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      onClick={handleBack} 
+                      disabled={isTransitioning}
+                      className="inline-flex items-center gap-2 text-sm text-creme/40 hover:text-creme transition-colors mt-4 bg-white/5 hover:bg-white/10 px-4 py-2 rounded-xl border border-white/5"
                     >
-                      <span className={`w-8 h-8 rounded-full border border-white/20 flex items-center justify-center text-[11px] font-bold ${answers[step] === opt.v ? "bg-highlight border-highlight text-white" : ""}`}>{opt.l}</span>
-                      <span className="text-[15px]">{opt.t}</span>
-                    </button>
-                  ))}
-                </div>
-                {step > 1 && <button onClick={handleBack} className="text-xs text-creme/30 hover:text-creme transition-colors mt-8">← Voltar</button>}
-              </motion.div>
+                      ← Voltar
+                    </motion.button>
+                  )}
+                </motion.div>
+              ) : (
+                <motion.div 
+                  key="lead-form"
+                  initial={{ opacity: 0, y: 15, scale: 0.98 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -15, scale: 0.98 }}
+                  transition={{ duration: 0.4, ease: "easeOut" }}
+                  className="bg-white/5 border border-white/10 p-8 md:p-12 rounded-[32px] text-center shadow-xl"
+                >
+                  <h3 className="font-serif text-2xl md:text-3xl font-bold text-creme mb-3">Seu diagnóstico está pronto!</h3>
+                  <p className="text-creme/40 text-sm md:text-base mb-10 max-w-md mx-auto">Preencha os dados abaixo para receber seu resultado personalizado diretamente no WhatsApp.</p>
+                  
+                  <div className="space-y-4 max-w-sm mx-auto">
+                    <div className="relative group">
+                      <input 
+                        type="text" 
+                        placeholder="Nome completo" 
+                        value={nome} 
+                        onChange={(e) => setNome(e.target.value)} 
+                        className="w-full bg-white/5 border border-white/10 rounded-xl p-4 text-creme outline-none focus:border-highlight focus:ring-1 focus:ring-highlight/30 transition-all text-[15px]" 
+                      />
+                    </div>
+                    <div className="relative group">
+                      <input 
+                        type="tel" 
+                        placeholder="WhatsApp com DDD" 
+                        value={wa} 
+                        onChange={(e) => setWa(e.target.value)} 
+                        className="w-full bg-white/5 border border-white/10 rounded-xl p-4 text-creme outline-none focus:border-highlight focus:ring-1 focus:ring-highlight/30 transition-all text-[15px]" 
+                      />
+                    </div>
+                    <motion.button 
+                      onClick={handleSend} 
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      className="w-full bg-highlight text-white py-5 rounded-full font-bold text-[11px] uppercase tracking-widest transition-all hover:bg-highlight/80 flex items-center justify-center gap-3 shadow-lg shadow-highlight/25"
+                    >
+                      Receber meu diagnóstico <ArrowRight size={16} />
+                    </motion.button>
+                  </div>
+                  
+                  <button 
+                    onClick={() => setStep(steps.length)} 
+                    className="text-xs text-creme/30 hover:text-creme transition-colors mt-8 inline-block underline underline-offset-4"
+                  >
+                    ← Corrigir respostas
+                  </button>
+                </motion.div>
+              )
             ) : (
-              <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="bg-white/5 border border-white/10 p-12 rounded-[40px] text-center">
-                <h3 className="font-serif text-2xl font-bold text-creme mb-2">Seu diagnóstico está pronto</h3>
-                <p className="text-creme/40 text-sm mb-10">Preencha os dados para receber seu resultado personalizado no WhatsApp.</p>
-                <div className="space-y-4 max-w-sm mx-auto">
-                  <input type="text" placeholder="Nome completo" value={nome} onChange={(e) => setNome(e.target.value)} className="w-full bg-white/5 border border-white/10 rounded-xl p-4 text-creme outline-none focus:border-highlight transition-colors" />
-                  <input type="tel" placeholder="WhatsApp com DDD" value={wa} onChange={(e) => setWa(e.target.value)} className="w-full bg-white/5 border border-white/10 rounded-xl p-4 text-creme outline-none focus:border-highlight transition-colors" />
-                  <button onClick={handleSend} className="w-full bg-highlight text-white py-5 rounded-full font-bold text-[11px] uppercase tracking-widest transition-all hover:bg-highlight/80 flex items-center justify-center gap-3">Receber meu diagnóstico <ArrowRight size={16} /></button>
+              <motion.div 
+                key="result-page"
+                initial={{ opacity: 0, y: 30, scale: 0.98 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ duration: 0.5, type: "spring", damping: 20 }}
+                className="text-center bg-white/5 border border-white/10 p-8 md:p-16 rounded-[40px] shadow-2xl relative overflow-hidden"
+              >
+                {/* Visual celebratory overlay */}
+                <div className="absolute -top-24 -left-24 w-48 h-48 bg-highlight/10 rounded-full blur-3xl pointer-events-none" />
+                <div className="absolute -bottom-24 -right-24 w-48 h-48 bg-verde-claro/10 rounded-full blur-3xl pointer-events-none" />
+
+                <motion.div 
+                  initial={{ scale: 0, rotate: -20 }}
+                  animate={{ scale: 1, rotate: 0 }}
+                  transition={{ delay: 0.1, type: "spring", stiffness: 120, damping: 12 }}
+                  className="w-24 h-24 bg-highlight/20 border border-highlight/25 rounded-full flex items-center justify-center text-5xl mx-auto mb-8 shadow-inner"
+                >
+                  {r.icon}
+                </motion.div>
+                
+                <span className="text-[10px] uppercase tracking-[0.3em] font-bold text-highlight block mb-3">Diagnóstico Concluído</span>
+                <h3 className="font-serif text-3xl md:text-4xl font-bold text-creme mb-4 max-w-xl mx-auto leading-tight">{r.titulo}</h3>
+                <p className="text-creme/60 text-base md:text-lg leading-relaxed mb-10 max-w-xl mx-auto">{r.desc}</p>
+                
+                <div className="inline-block bg-highlight/10 border border-highlight/20 px-8 py-4 rounded-2xl mb-12">
+                  <span className="text-xs uppercase tracking-[0.2em] font-bold text-highlight/80 block mb-1">Recomendação</span>
+                  <div className="font-serif italic text-2xl md:text-3xl text-creme">{r.produto}</div>
                 </div>
-                <button onClick={() => setStep(steps.length)} className="text-xs text-creme/30 hover:text-creme transition-colors mt-8">← Corrigir respostas</button>
+
+                <div className="flex flex-col gap-4 max-w-sm mx-auto">
+                  <motion.a 
+                    href={`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(r.msg)}`} 
+                    target="_blank" 
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.97 }}
+                    className="bg-[#25D366] text-white py-5 rounded-full font-bold text-[11px] uppercase tracking-widest flex items-center justify-center gap-3 hover:shadow-lg hover:shadow-[#25D366]/25 transition-all"
+                  >
+                    <MessageCircle size={20} fill="currentColor" /> Falar com a Débora
+                  </motion.a>
+                  <a href={r.link} className="text-sm text-creme/40 hover:text-highlight transition-colors flex items-center justify-center gap-1.5 py-2 underline underline-offset-4">
+                    Ver detalhes do programa <ChevronRight size={14} />
+                  </a>
+                </div>
               </motion.div>
             )}
-          </>
-        ) : (
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center">
-            <div className="w-20 h-20 bg-highlight/20 rounded-full flex items-center justify-center text-4xl mx-auto mb-8">{r.icon}</div>
-            <h3 className="font-serif text-3xl font-bold text-creme mb-4">{r.titulo}</h3>
-            <p className="text-creme/60 text-lg leading-relaxed mb-8">{r.desc}</p>
-            <div className="font-serif italic text-2xl text-highlight mb-12">{r.produto}</div>
-            <div className="flex flex-col gap-4 max-w-sm mx-auto">
-              <a href={`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(r.msg)}`} target="_blank" className="bg-[#25D366] text-white py-5 rounded-full font-bold text-[11px] uppercase tracking-widest flex items-center justify-center gap-3 hover:scale-105 transition-transform"><MessageCircle size={20} fill="currentColor" /> Falar com a Débora</a>
-              <a href={r.link} className="text-sm text-creme/40 hover:text-highlight transition-colors">Ver detalhes do programa →</a>
-            </div>
-          </motion.div>
-        )}
+          </AnimatePresence>
+        </div>
       </div>
     </section>
   );
