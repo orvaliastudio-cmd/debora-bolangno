@@ -1743,10 +1743,10 @@ const Footer = () => {
         </div>
 
         <div className="text-center md:text-right">
-          <p className="text-creme/60 text-[11px] font-mono uppercase tracking-[0.4em] mb-1">
-            Desenvolvido por <a href="https://www.orvalia.com.br" target="_blank" rel="noopener" className="hover:text-creme transition-colors underline underline-offset-4">Orvalia Studio</a>
+          <p className="text-creme/60 text-[9px] sm:text-[11px] font-mono uppercase tracking-[0.2em] sm:tracking-[0.4em] mb-1">
+            Desenvolvido por <a href="https://www.orvalia.com.br" target="_blank" rel="noopener" className="hover:text-creme transition-colors underline underline-offset-4 whitespace-nowrap">Orvalia Studio</a>
           </p>
-          <p className="text-[11px] font-mono text-creme/60 uppercase tracking-[0.4em]">© 2026 Débora Bolangno · Todos os direitos reservados</p>
+          <p className="text-[9px] sm:text-[11px] font-mono text-creme/60 uppercase tracking-[0.2em] sm:tracking-[0.4em]">© 2026 Débora Bolangno · Todos os direitos reservados</p>
         </div>
       </div>
     </footer>
