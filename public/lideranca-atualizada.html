@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liderança Atualizada | Débora Bolangno</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Jost:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        verde: '#1a3a2e',
+                        'verde-med': '#2d5a47',
+                        dourado: '#bca374',
+                        creme: '#F9F7F2',
+                        ink: '#121212',
+                        highlight: '#8b2d2d',
+                    },
+                    fontFamily: {
+                        serif: ['Cormorant Garamond', 'serif'],
+                        sans: ['Jost', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --brand-green: #1a3a2e; 
+            --brand-green-med: #2d5a47;
+            --brand-gold: #bca374;
+            --brand-cream: #F9F7F2;
+            --brand-cream-light: #f5f0e8;
+            --brand-white: #ffffff;
+            --brand-ink: #121212;
+            --brand-highlight: #09778b;
+            
+            --font-display: 'Playfair Display', serif;
+            --font-body: 'Jost', sans-serif;
+            --font-cormorant: 'Cormorant Garamond', serif;
+            
+            --transition: 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--brand-ink);
+            background-color: var(--brand-cream);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-display);
+            color: var(--brand-green);
+        }
+
+        a { text-decoration: none; transition: var(--transition); }
+
+        /* Consistent Header Styling */
+        header {
+            background-color: #ffffff;
+            backdrop-filter: blur(10px);
+            padding: 12px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(26, 58, 46, 0.05);
+            transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .nav-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .logo-img {
+            width: 44px;
+            height: 44px;
+            object-fit: contain;
+        }
+
+        .logo-text-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-name {
+            font-family: var(--font-display);
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--brand-ink);
+            line-height: 1.1;
+            letter-spacing: -0.01em;
+        }
+
+        .logo-subtitle {
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            color: var(--brand-green-med);
+            font-weight: 700;
+            margin-top: 2px;
+            opacity: 0.5;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .nav-menu a {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            color: rgba(18, 18, 18, 0.6);
+            padding: 4px 0;
+            position: relative;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--brand-green);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover { color: var(--brand-green); }
+        .nav-menu a:hover::after { width: 100%; }
+
+        .btn-nav {
+            background: var(--brand-green);
+            color: var(--brand-white);
+            padding: 12px 28px;
+            border-radius: 9999px;
+            font-size: 10px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            transition: all 0.3s ease;
+        }
+
+        .btn-nav:hover { 
+            background: #112e28;
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 1024px) {
+            .nav-menu { display: none; }
+            .nav-inner { padding: 0 24px; }
+        }
+
+        /* Responsive Img Adjustments */
+        .intro-img {
+            width: 100%;
+            height: clamp(300px, 40vw, 600px);
+            border-radius: 40px;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        /* Design based on Home Page Title Aesthetics */
+        .page-intro {
+            padding: 140px 0 80px;
+        }
+
+        .page-intro-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .tag {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 800;
+            color: var(--brand-gold);
+            margin-bottom: 24px;
+            display: block;
+        }
+
+        .title-display {
+            font-size: clamp(38px, 4.6vw, 64px);
+            font-weight: 900;
+            line-height: 1.15;
+            margin-bottom: 24px;
+            color: var(--brand-green);
+        }
+
+        .title-display i {
+            font-style: italic;
+            font-weight: 400;
+            opacity: 0.7;
+        }
+
+        .intro-img-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .intro-img {
+            width: 100%;
+            height: 520px;
+            border-radius: 40px;
+            object-fit: cover;
+            object-position: center;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.1);
+            display: block;
+        }
+
+        .intro-subtitle {
+            font-size: clamp(16px, 1.3vw, 19px);
+            color: rgba(18, 18, 18, 0.85);
+            max-width: 520px;
+            line-height: 1.7;
+            margin-top: 24px;
+        }
+
+        /* Pillars Section */
+        .pillars-section {
+            padding: 120px 0;
+            background-color: var(--brand-white);
+        }
+
+        .pillars-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background-color: rgba(26, 58, 46, 0.05);
+            border-radius: 40px;
+            overflow: hidden;
+            border: 1px solid rgba(26, 58, 46, 0.05);
+        }
+
+        .pillar-card {
+            background-color: var(--brand-white);
+            padding: 64px;
+            transition: var(--transition);
+        }
+
+        .pillar-card:hover { background-color: var(--brand-cream); }
+
+        .pillar-card h3 { font-size: 28px; margin-bottom: 16px; font-weight: 700; }
+        .pillar-card p { font-size: 17px; color: rgba(18, 18, 18, 0.8); }
+
+        /* CTA */
+        .cta-section { padding: 140px 0; text-align: center; }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 24px 64px;
+            background: var(--brand-gold);
+            color: var(--brand-green);
+            border-radius: 9999px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 12px;
+            transition: var(--transition);
+        }
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(201, 169, 110, 0.3);
+            background: var(--brand-green);
+            color: var(--brand-white);
+        }
+
+        footer {
+            background-color: var(--brand-green);
+            padding: 80px 0;
+            text-align: center;
+            color: rgba(245, 240, 232, 0.3);
+            font-size: 12px;
+        }
+
+        .floating-actions {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            display: flex;
+            gap: 16px;
+            z-index: 9999;
+        }
+        .float-btn {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: var(--transition);
+        }
+        .float-btn:hover { transform: scale(1.1); }
+        .btn-whatsapp { background-color: #25D366; color: white; display: flex; align-items: center; justify-content: center; }
+        .btn-up { background-color: var(--brand-green); color: white; display: flex; align-items: center; justify-content: center; }
+
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            color: var(--brand-green);
+            margin-bottom: 40px;
+            opacity: 0.6;
+            transition: var(--transition);
+        }
+        .btn-back:hover {
+            opacity: 1;
+            transform: translateX(-5px);
+        }
+
+        @media (max-width: 1024px) {
+            .nav-menu { display: none; }
+            .nav-inner { padding: 0 24px; }
+            .page-intro { padding: 120px 0 60px; }
+            .page-intro-inner { 
+                grid-template-columns: 1fr !important; 
+                gap: 48px;
+                text-align: center;
+            }
+            .intro-img { 
+                height: 400px; 
+                border-radius: 24px;
+            }
+            .intro-subtitle { margin: 32px auto 0; }
+            .title-divider { margin: 0 auto 40px !important; }
+            .pillars-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 640px) {
+            .intro-img { height: 320px; }
+            .page-intro { padding: 100px 0 40px; }
+            .title-display { font-size: 42px; }
+        }
+
+        #header {
+            border-bottom: 1px solid rgba(18, 55, 42, 0.10);
+            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04);
+            background-color: #ffffff;
+        }
+    </style>
+
+</head>
+<body>
+
+    <header id="header" class="fixed top-0 left-0 right-0 z-[100] h-20 transition-all duration-400">
+        <div class="max-w-7xl mx-auto px-6 sm:px-8 h-full flex justify-between items-center">
+            <div class="flex items-center gap-6 md:gap-10">
+                <a href="index.html" class="text-[10px] md:text-[11px] uppercase tracking-[0.2em] font-bold text-ink/70 hover:text-verde flex items-center gap-2 transition-colors">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+                    VOLTAR
+                </a>
+                <div class="hidden lg:block w-px h-6 bg-ink/10"></div>
+                <a href="index.html" class="flex items-center gap-3 group">
+                    <img src="https://i.ibb.co/v4bp7gxB/logo-db-3.png" alt="Logo Débora Bolangno" class="w-9 h-9 md:w-11 md:h-11 object-contain group-hover:scale-110 transition-transform">
+                    <div class="hidden sm:flex flex-col">
+                        <span class="font-serif text-base md:text-lg font-bold text-ink leading-tight">Débora Bolangno</span>
+                        <span class="text-[8px] md:text-[9px] uppercase tracking-[0.2em] text-ink/40 font-medium">Estratégia de Carreira & Liderança</span>
+                    </div>
+                </a>
+            </div>
+    
+            <div class="hidden min-[1050px]:flex items-center gap-8">
+                <nav class="flex gap-7">
+                    <a href="index.html#sobre" class="text-[10px] uppercase tracking-[0.2em] font-semibold text-ink/55 hover:text-verde transition-all">Sobre</a>
+                    <a href="index.html#depoimentos" class="text-[10px] uppercase tracking-[0.2em] font-semibold text-ink/55 hover:text-verde transition-all">Depoimentos</a>
+                    <a href="index.html#programas" class="text-[10px] uppercase tracking-[0.2em] font-semibold text-ink/55 hover:text-verde transition-all">Programas</a>
+                    <a href="index.html#palestras" class="text-[10px] uppercase tracking-[0.2em] font-semibold text-ink/55 hover:text-verde transition-all">Palestras</a>
+                    <a href="blog.html" class="text-[10px] uppercase tracking-[0.2em] font-semibold text-ink/55 hover:text-verde transition-all">Blog</a>
+                    <a href="index.html#contato" class="text-[10px] uppercase tracking-[0.2em] font-semibold text-ink/55 hover:text-verde transition-all">Contato</a>
+                </nav>
+                <a href="https://wa.me/5511940803333" target="_blank" class="bg-verde text-white px-6 py-3 rounded-full text-[10px] uppercase tracking-[0.2em] font-bold hover:bg-[#112e28] transition-all">Solicitar Proposta</a>
+            </div>
+    
+            <button id="menu-toggle" class="min-[1050px]:hidden text-ink p-2">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 z-[50000] hidden">
+        <div id="menu-backdrop" class="absolute inset-0 bg-white"></div>
+        <div id="menu-content" class="absolute top-0 right-0 bottom-0 w-[85%] max-w-[360px] bg-white flex flex-col p-8 shadow-2xl translate-x-full transition-transform duration-300">
+            <div class="flex justify-between items-center mb-12">
+                <div class="flex items-center gap-3">
+                    <img src="https://i.ibb.co/v4bp7gxB/logo-db-3.png" alt="Logo" class="w-10 h-10 object-contain">
+                    <div class="flex flex-col">
+                        <span class="font-serif text-base font-bold text-ink">Débora Bolangno</span>
+                        <span class="text-[9px] uppercase tracking-[0.2em] text-ink/40 font-medium">Estratégia de Carreira</span>
+                    </div>
+                </div>
+                <button id="menu-close" class="p-2 text-ink">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                </button>
+            </div>
+            <nav class="flex flex-col gap-1">
+                <a href="index.html#sobre" class="text-[12px] uppercase tracking-[0.2em] font-semibold text-ink/55 hover:text-verde transition-all flex items-center justify-between py-3.5 border-b border-ink/5">
+                    <span>Sobre</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="opacity-30"><path d="m9 18 6-6-6-6"/></svg>
+                </a>
+                <a href="index.html#depoimentos" class="text-[12px] uppercase tracking-[0.2em] font-semibold text-ink/55 hover:text-verde transition-all flex items-center justify-between py-3.5 border-b border-ink/5">
+                    <span>Depoimentos</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="opacity-30"><path d="m9 18 6-6-6-6"/></svg>
+                </a>
+                <a href="index.html#programas" class="text-[12px] uppercase tracking-[0.2em] font-semibold text-ink/55 hover:text-verde transition-all flex items-center justify-between py-3.5 border-b border-ink/5">
+                    <span>Programas</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="opacity-30"><path d="m9 18 6-6-6-6"/></svg>
+                </a>
+                <a href="index.html#palestras" class="text-[12px] uppercase tracking-[0.2em] font-semibold text-ink/55 hover:text-verde transition-all flex items-center justify-between py-3.5 border-b border-ink/5">
+                    <span>Palestras</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="opacity-30"><path d="m9 18 6-6-6-6"/></svg>
+                </a>
+                <a href="blog.html" class="text-[12px] uppercase tracking-[0.2em] font-semibold text-ink/55 hover:text-verde transition-all flex items-center justify-between py-3.5 border-b border-ink/5">
+                    <span>Blog</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="opacity-30"><path d="m9 18 6-6-6-6"/></svg>
+                </a>
+                <a href="index.html#contato" class="text-[12px] uppercase tracking-[0.2em] font-semibold text-ink/55 hover:text-verde transition-all flex items-center justify-between py-3.5 border-b border-ink/5">
+                    <span>Contato</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="opacity-30"><path d="m9 18 6-6-6-6"/></svg>
+                </a>
+            </nav>
+            <div class="mt-auto pt-8 border-t border-ink/8">
+                <a href="https://wa.me/5511940803333" target="_blank" class="bg-verde text-white p-[18px] rounded-full text-center text-[11px] uppercase tracking-[0.2em] font-bold block">Solicitar Proposta</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const header = document.getElementById('header');
+        const menuToggle = document.getElementById('menu-toggle');
+        const menuClose = document.getElementById('menu-close');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuContent = document.getElementById('menu-content');
+        const menuBackdrop = document.getElementById('menu-backdrop');
+        const floatingActions = document.querySelector('.floating-actions');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('shadow-lg', 'shadow-verde/6');
+            } else {
+                header.classList.remove('shadow-lg', 'shadow-verde/6');
+            }
+        });
+
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.remove('hidden');
+            setTimeout(() => {
+                menuContent.classList.remove('translate-x-full');
+            }, 10);
+            document.body.style.overflow = 'hidden';
+            if (floatingActions) floatingActions.style.display = 'none';
+        });
+
+        const closeMenu = () => {
+            menuContent.classList.add('translate-x-full');
+            setTimeout(() => {
+                mobileMenu.classList.add('hidden');
+                if (floatingActions) floatingActions.style.display = '';
+            }, 300);
+            document.body.style.overflow = '';
+        };
+
+        menuClose.addEventListener('click', closeMenu);
+        menuBackdrop.addEventListener('click', closeMenu);
+        mobileMenu.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', closeMenu);
+        });
+    </script>
+</header>
+
+    <div class="pt-20"></div>
+
+    <section class="page-intro pb-12">
+        <div class="container">
+            <div class="page-intro-inner">
+                <div class="text-center md:text-left">
+                    <span class="tag">Mentoria em Grupo</span>
+                    <h1 class="title-display">Liderança Atualizada</h1>
+                    <div class="title-divider" style="width: 100px; height: 1px; background: var(--brand-gold); margin: 0 auto 32px; md:margin-left: 0;"></div>
+                    <p class="intro-subtitle">
+                        Um programa em grupo para líderes que querem se comunicar melhor, tomar decisões com mais clareza e conduzir seus times com mais segurança.
+                    </p>
+                    
+                    <!-- Bloco de Inscrição Ativo (Destaque Premium) -->
+                    <div class="mt-8 mb-4 p-6 md:p-8 bg-[#FAF6F0] border-2 border-verde rounded-[32px] shadow-xl shadow-verde/5 flex flex-col gap-5 max-w-[500px] mx-auto md:mx-0 text-left relative overflow-hidden">
+                        <div class="flex items-center justify-between gap-4 border-b border-verde/10 pb-4 flex-wrap">
+                            <span class="inline-flex items-center gap-1.5 bg-verde text-creme text-[9px] uppercase tracking-[0.2em] font-extrabold px-3 py-1.5 rounded-full shadow-sm">
+                                <span class="w-1.5 h-1.5 rounded-full bg-dourado animate-pulse"></span> INSCRIÇÕES ABERTAS
+                            </span>
+                            <span class="text-[10px] uppercase tracking-[0.2em] text-[#bca374] font-black">
+                                Turma de Agosto
+                            </span>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <div>
+                                <span class="block text-[9px] font-black tracking-widest text-ink/50 uppercase mb-1.5">Encontros Online ao Vivo</span>
+                                <div class="flex items-center gap-2.5 text-verde">
+                                    <svg class="w-5 h-5 shrink-0 text-[#bca374]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                                    </svg>
+                                    <span class="text-xl md:text-2xl font-serif font-black text-verde">03, 10, 17 e 24/08</span>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center gap-2.5 text-ink/80">
+                                <svg class="w-5 h-5 shrink-0 text-[#bca374]/80" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 16 14"></polyline>
+                                </svg>
+                                <span class="text-xs md:text-sm font-bold text-ink">Segundas-feiras, das 20h às 21h30</span>
+                            </div>
+                        </div>
+
+                        <div class="border-t border-verde/10 pt-4 mt-1">
+                            <p class="text-xs md:text-[13px] text-ink/85 leading-relaxed font-medium">
+                                <span class="font-bold text-verde">Vagas limitadas</span> para preservar a profundidade das trocas e o acompanhamento do grupo.
+                            </p>
+                        </div>
+
+                        <div class="mt-2">
+                            <a href="https://wa.me/5511940803333?text=Ol%C3%A1%2C%20gostaria%20de%20garantir%20minha%20vaga%20na%20turma%20de%20agosto%20da%20mentoria%20Lideran%C3%A7a%20Atualizada." class="flex items-center justify-center gap-3 bg-verde text-white hover:bg-[#112e28] w-full py-4.5 px-6 rounded-full text-xs font-black uppercase tracking-[0.25em] shadow-lg shadow-verde/15 hover:-translate-y-px transition-all duration-300">
+                                <span>Garantir minha vaga</span>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="intro-img-wrapper">
+                    <img src="https://i.ibb.co/3ydbm1z4/Debora-marca-intencional-3.webp" alt="Liderança" class="intro-img" style="object-position: 50% 20%;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pillars-section py-20 md:py-24 bg-[#FCFAF7]">
+        <div class="container">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white border border-ink/15 rounded-[32px] p-8 md:p-12 shadow-sm hover:border-verde/30 hover:shadow-[0_20px_40px_rgba(26,58,46,0.06)] transition-all">
+                    <span class="text-[10px] uppercase tracking-[0.2em] text-[#bca374] font-black mb-4 block">Pilar 01</span>
+                    <h3 class="text-2xl md:text-3xl font-serif mb-4 text-verde font-bold leading-tight">Comunicação Assertiva</h3>
+                    <p class="text-ink leading-relaxed text-sm md:text-base font-medium">Aprenda a alinhar expectativas, conduzir conversas difíceis e reduzir ruídos na comunicação com o time.</p>
+                </div>
+                <div class="bg-white border border-ink/15 rounded-[32px] p-8 md:p-12 shadow-sm hover:border-verde/30 hover:shadow-[0_20px_40px_rgba(26,58,46,0.06)] transition-all">
+                    <span class="text-[10px] uppercase tracking-[0.2em] text-[#bca374] font-black mb-4 block">Pilar 02</span>
+                    <h3 class="text-2xl md:text-3xl font-serif mb-4 text-verde font-bold leading-tight">Cultura de Confiança</h3>
+                    <p class="text-ink leading-relaxed text-sm md:text-base font-medium">Construa um ambiente de segurança psicológica, colaboração e responsabilidade compartilhada.</p>
+                </div>
+                <div class="bg-white border border-ink/15 rounded-[32px] p-8 md:p-12 shadow-sm hover:border-verde/30 hover:shadow-[0_20px_40px_rgba(26,58,46,0.06)] transition-all">
+                    <span class="text-[10px] uppercase tracking-[0.2em] text-[#bca374] font-black mb-4 block">Pilar 03</span>
+                    <h3 class="text-2xl md:text-3xl font-serif mb-4 text-verde font-bold leading-tight">Foco em Resultados</h3>
+                    <p class="text-ink leading-relaxed text-sm md:text-base font-medium">Desenvolva clareza para priorizar, delegar melhor e acompanhar entregas com mais consistência.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Chamada Intermediária / CTA de Conversão -->
+    <section class="py-16 bg-[#FAF6F0] border-y border-ink/5 text-center">
+        <div class="container max-w-4xl">
+            <span class="text-[9px] uppercase tracking-[0.25em] text-[#bca374] font-black mb-3 block">Próxima Turma: Agosto</span>
+            <h3 class="font-serif text-3xl md:text-4xl font-black text-verde mb-4 leading-tight">Desenvolva a liderança que o mercado exige de você.</h3>
+            <p class="text-sm md:text-base text-ink/80 max-w-2xl mx-auto mb-8 font-medium">Encontros ao vivo, ferramentas práticas de gestão e a mentoria direta de quem constrói e acelera carreiras de alto nível.</p>
+            <a href="https://wa.me/5511940803333?text=Ol%C3%A1%2C%20gostaria%20de%20garantir%20minha%20vaga%20na%20turma%20de%20agosto%20da%20mentoria%20Lideran%C3%A7a%20Atualizada." class="btn bg-verde text-creme hover:bg-[#112e28] hover:text-white px-10 py-5 text-[10px] uppercase tracking-widest shadow-lg shadow-verde/15">Garantir minha vaga</a>
+        </div>
+    </section>
+
+    <section class="cta-section bg-creme pt-16 pb-24 md:py-32">
+        <div class="container text-center">
+            <h2 class="text-3xl md:text-5xl lg:text-6xl font-serif mb-10 leading-tight">Seu time é um <br> <i>reflexo</i> da sua liderança.</h2>
+            <a href="https://wa.me/5511940803333?text=Ol%C3%A1%2C%20gostaria%20de%20garantir%20minha%20vaga%20na%20turma%20de%20agosto%20da%20mentoria%20Lideran%C3%A7a%20Atualizada." class="btn w-full sm:w-auto justify-center bg-verde text-creme hover:bg-[#112e28] shadow-lg shadow-verde/20">Garantir minha vaga</a>
+            <div class="mt-12 flex justify-center">
+                <a href="index.html#programas" class="text-[11px] uppercase tracking-[0.3em] font-bold text-ink/40 hover:text-verde transition-colors py-4 px-8 border border-ink/10 rounded-full">
+                    VOLTAR
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-verde py-16 px-8 text-creme mt-24">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10">
+            <div class="flex flex-col items-center md:items-start gap-4">
+                <div class="flex items-center gap-4">
+                    <img src="https://i.ibb.co/v4bp7gxB/logo-db-3.png" alt="Logo" class="w-10 h-10 object-contain brightness-0 invert">
+                    <div class="flex flex-col">
+                        <span class="font-serif text-xl font-bold leading-none mb-1">Débora Bolangno</span>
+                        <span class="text-[9px] uppercase tracking-widest text-creme/40">Estratégia de Carreira & Liderança</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex gap-6">
+                <a href="https://www.instagram.com/deborabolangno" target="_blank" class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-white/10 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg>
+                </a>
+                <a href="https://www.linkedin.com/in/deborabolangno" target="_blank" class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-white/10 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                </a>
+                <a href="mailto:deborabolangno@outlook.com" class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-white/10 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"></path><rect x="2" y="4" width="20" height="16" rx="2"></rect></svg>
+                </a>
+            </div>
+
+            <div class="text-center md:text-right">
+                <p class="text-creme/60 text-[11px] font-mono uppercase tracking-[0.4em] mb-1">
+                    Desenvolvido por <a href="https://www.orvalia.com.br" target="_blank" rel="noopener" class="hover:text-creme transition-colors underline underline-offset-4">Orvalia Studio</a>
+                </p>
+                <p class="text-[11px] font-mono text-creme/60 uppercase tracking-[0.4em]">© 2026 Débora Bolangno · Todos os direitos reservados</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="floating-actions">
+        <a href="https://wa.me/5511940803333?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20gostaria%20de%20saber%20mais%20sobre%20a%20Mentoria%20em%20Grupo%20Lideran%C3%A7a%20e%20Gest%C3%A3o" target="_blank" class="float-btn btn-whatsapp" aria-label="Contato via WhatsApp">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.414 0 .018 5.396.015 12.03c0 2.12.541 4.191 1.57 6.017L0 24l6.105-1.602a11.834 11.834 0 005.937 1.57h.005c6.637 0 12.032-5.396 12.035-12.032.003-3.218-1.248-6.242-3.517-8.511z"/></svg>
+        </a>
+        <button onclick="window.scrollTo({top:0, behavior:'smooth'})" class="float-btn btn-up" aria-label="Voltar ao topo">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
+        </button>
+    </div>
+
+</body>
+</html>
