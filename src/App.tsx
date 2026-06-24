@@ -487,7 +487,7 @@ const Identification = () => {
           transition={{ delay: 0.8 }}
           className="mt-24 text-center font-cormorant text-[24px] md:text-[32px] font-semibold text-verde/60 italic max-w-3xl mx-auto leading-relaxed"
         >
-          "O esforço desgovernado consome você. A estratégia clara liberta você."
+          "O esforço sem direção consome.<br />A estratégia clara liberta."
         </motion.p>
       </div>
     </section>
