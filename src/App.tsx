@@ -1291,7 +1291,7 @@ const ProgramsGrid = () => {
                   {card.ctaPageLabel}
                 </a>
                 <a 
-                  href={`https://wa.me/5511940803333?text=%24{encodeURIComponent(card.whatsapp)}`}
+                  href={`https://wa.me/5511940803333?text=${encodeURIComponent(card.whatsapp)}`}
                   target="_blank"
                   rel="noopener"
                   className="block w-full border border-verde/20 text-verde-med hover:bg-verde/5 py-3.5 rounded-full text-[10px] uppercase tracking-[0.25em] font-bold text-center transition-all duration-300"
@@ -1771,7 +1771,7 @@ export default function App() {
         <div className="fixed bottom-6 right-6 sm:bottom-8 sm:right-8 z-50 flex gap-3 sm:gap-4 items-center">
           {/* WhatsApp Button */}
           <a
-            href={`https://wa.me/5511940803333?text=%24{encodeURIComponent("Olá, vim pelo site e gostaria de mais informações.")}`}
+            href={`https://wa.me/5511940803333?text=${encodeURIComponent("Olá, vim pelo site e gostaria de mais informações.")}`}
             target="_blank"
             rel="noopener noreferrer"
             className="p-3 sm:p-4 bg-[#25D366] text-white rounded-full shadow-2xl hover:scale-110 transition-all flex items-center justify-center"
