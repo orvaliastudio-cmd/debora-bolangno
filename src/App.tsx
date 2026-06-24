@@ -395,7 +395,7 @@ const Hero = () => {
             <img 
               src="https://i.ibb.co/mVqGg1yW/debora-hero-nova.webp" 
               alt="Débora Bolangno" 
-              className="absolute w-full h-[110%] -top-[5%] object-cover"
+              className="absolute w-full h-[110%] -top-[5%] object-cover object-[center_20%]"
               referrerPolicy="no-referrer"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>
@@ -412,7 +412,7 @@ const Hero = () => {
           <img 
             src="https://i.ibb.co/mVqGg1yW/debora-hero-nova.webp" 
             alt="Débora Bolangno" 
-            className="absolute w-full h-[110%] -top-[5%] object-cover transition-transform duration-[3s] hover:scale-105"
+            className="absolute w-full h-[110%] -top-[5%] object-cover object-[center_20%] transition-transform duration-[3s] hover:scale-105"
             referrerPolicy="no-referrer"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>
@@ -1567,7 +1567,7 @@ const Differentials = () => {
             <img 
               src="https://i.ibb.co/mVqGg1yW/debora-hero-nova.webp" 
               alt="Débora Bolangno Diferenciais" 
-              className="w-full h-full object-cover transition-transform duration-[3s] group-hover:scale-105"
+              className="w-full h-full object-cover object-[center_20%] transition-transform duration-[3s] group-hover:scale-105"
               referrerPolicy="no-referrer"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-verde/60 via-transparent to-transparent"></div>
@@ -1680,7 +1680,7 @@ const CTA = () => {
             <img 
               src="https://i.ibb.co/FLG1NkW7/debora-Pronto-para-o-seu-pr-ximo-n-vel-na-carreira.webp" 
               alt="Débora Bolangno" 
-              className="w-full h-full object-cover transition-transform duration-[3s] hover:scale-105"
+              className="w-full h-full object-cover object-[center_20%] transition-transform duration-[3s] hover:scale-105"
               referrerPolicy="no-referrer"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
@@ -1777,6 +1777,19 @@ export default function App() {
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Handle hash scrolling on mount (e.g. index.html#programas)
+  useEffect(() => {
+    if (window.location.hash) {
+      const hash = window.location.hash;
+      setTimeout(() => {
+        const element = document.querySelector(hash);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 300);
+    }
   }, []);
 
   // Close modal on Esc key
