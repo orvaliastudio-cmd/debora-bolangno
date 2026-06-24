@@ -1,6 +1,47 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+            <!-- Fix for "Uncaught TypeError: Cannot set property fetch of #<Window> which has only a getter" -->
+    <script>
+      (function() {
+        try {
+          var _fetch = window.fetch || (typeof Window !== 'undefined' && Window.prototype ? Window.prototype.fetch : null);
+          if (!_fetch) return;
+
+          var currentFetch = _fetch;
+
+          var descriptor = {
+            configurable: true,
+            enumerable: true,
+            get: function() {
+              return currentFetch;
+            },
+            set: function(v) {
+              currentFetch = v;
+            }
+          };
+
+          // Try defining getter/setter on window
+          try {
+            Object.defineProperty(window, 'fetch', descriptor);
+          } catch (e) {
+            // Safe to ignore or log
+          }
+
+          // Try defining getter/setter on Window.prototype
+          if (typeof Window !== 'undefined' && Window.prototype) {
+            try {
+              Object.defineProperty(Window.prototype, 'fetch', descriptor);
+            } catch (e) {
+              // Safe to ignore or log
+            }
+          }
+        } catch (err) {
+          console.error('Error during fetch patch:', err);
+        }
+      })();
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Posicionamento profissional não é autopromoção | Débora Bolangno</title>
